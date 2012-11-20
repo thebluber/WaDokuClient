@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <title>WaDokuJT</title>
+  <link rel='stylesheet' href='<%= to '/css/bootstrap.css' %>' />
+</head>
+
+  <div class='navbar'>
+    <div class='navbar-inner'>
+      <div class='container'>
+        <a href='#' class='brand'>WaDokuJT</a>
+        <form class='navbar-search pull-right'>
+          <input name='query' type='text' class='search-query' />
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <%= yield %>
+
+    <footer>
+      <p>Daten: &copy; <%= Time.now.year %> <a href="http://wadoku-ev.de">Wadoku e.V.</a> | Programmierung: &copy; <%= Time.now.year %> <a href="http://rbraun.net">Roger Braun</a></p>
+      <p>Code und Daten dieser Seite stehen unter offenen Lizenzen (CC und GPL). Beides findet sich auf <a href='https://github.com/Wadoku"'>GitHub</a>.</p>
+    </footer>
+  </div>
+</body>
+</html>
