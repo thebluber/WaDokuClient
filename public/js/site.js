@@ -59,19 +59,45 @@ var balance_columns = function () {
     return _.reduce(collection, function(res, el) {return res + $(el).height();}, 0);
   };
 
-  console.log("Entries right:");
-
   entries.remove();
   $(entries_left).append(entries);
+
+  // Put everything in the right column until it is somewhat even.
   while(height($(entries_left).children()) > height($(entries_right).children()) + 100) {
-    var children = $(entries_left).children();
-    var switcher = children[children.length - 1];
+    var switcher = $(entries_left).children().last();
     switcher.remove();
     $(entries_right).prepend(switcher);
     console.log(height($(entries_left).children()));
     console.log(height($(entries_right).children()));
   }
 
+  // Pad the height of the smaller column
+  var hlc = $(entries_left).children();
+  var hrc = $(entries_right).children();
+  var hl = height(hlc);
+  var hr = height(hrc);
+
+  var paddee;
+  var padding;
+  var unpadded;
+
+  if(hl > hr) {
+    paddee = hrc;
+    unpadded = hlc;
+    padding = (hl - hr) / (hrc.length - 1);
+  } else {
+    paddee = hlc;
+    unpadded = hrc;
+    padding = (hr - hl) / (hlc.length - 1);
+  }
+  var i;
+  
+  // Pad them all.
+  for(i = 0; i < paddee.length - 1; i++) {
+    var padding_bottom = parseInt($(paddee[i]).css('padding-bottom'), 10);
+    padding_bottom += padding;
+    $(paddee[i]).css('padding-bottom', padding_bottom);
+  }
 };
 
 var init = function() {
