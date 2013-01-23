@@ -1,0 +1,190 @@
+/* Everything entry-related */
+
+span.gen_m {
+}
+span.gen_n {
+}
+span.gen_f {
+}
+
+.emph {
+  font-weight: bold;
+}
+
+span.genus {
+  font-weight: bold;
+  color:orange;
+  font-size:xx-small;
+}
+
+span.f {
+  font-weight: bold;
+  color:red;
+  font-size:xx-small;
+}
+
+span.m{
+  font-weight: bold;
+  color:blue;
+  font-size:xx-small;
+}
+
+span.n {
+  font-weight: bold;
+  color:purple;
+  font-size:xx-small;
+}
+
+
+span.dom {
+  //font-weight: bold;
+  font-size:x-small;
+}
+
+span.dom:before {
+  content: "(";
+}
+
+span.dom:after {
+  content: ")";
+}
+
+span.usage, span.title, span.transcr, span.etym, span.scientif {
+  font-style: italic;
+}
+
+span.def {
+  color: green;
+}
+
+.entries {
+  font-family: 'Crimson Text',arial, serif;
+  font-size: 1.5em;
+/*  text-align:justify; */
+  padding-top:0.5em;
+}
+
+.hanging-indent {
+text-indent: -25px;
+padding-left: 25px;
+}
+
+.entry .writing {
+  font-size: 1.5em;
+}
+
+.entry p {
+  margin:0;
+}
+
+.entry {
+  padding-top: 3px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-bottom: 3px;
+}
+
+.entry:nth-child(even) {
+  background: #EBEEF5;
+}
+
+.entry.main_entry {
+  background: #F8C3CD;
+}
+
+.sub_entries {
+  margin-top: 10px;
+  margin-left: 20px;
+
+  border-style: dashed;
+  border-width: 1px;
+
+  display: none;
+
+  .entry.even {
+    background: #F2EBF5;
+  }
+
+  .entry.odd {
+    background: #F5F2EB;
+  }
+}
+
+.prior_1, .prior_2, .prior_3, .prior_4, .jlpt1, .jlpt2, .jlpt3, .jlpt4, .genki_k9 {
+  display:none;
+}
+
+.svg_image {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: block;
+}
+
+.svg_image .image_caption {
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.svg_image .svg a img{
+  width: 150px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pron_audio {
+  background-image: image-url("loudspeaker.png");
+  background-repeat: no-repeat;
+  vertical-align: super;
+}
+
+.pron_audio a {
+  margin-left: 15px;
+}
+
+.famn {
+  font-variant: small-caps;
+}
+
+#entries-left:first-child {
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-radius: 5px 5px 0px 0px;
+  border-radius: 5px 5px 0px 0px;
+  
+}
+
+// Uses Bitcons images from http://somerandomdude.com/work/bitcons/
+
+.sub_entry_toggle {
+  position: relative;
+  left: -25px;
+  width: 16px;
+  height: 16px;
+  display:block;
+  background: image-url("arrow1_e.png") no-repeat;
+  
+}
+.sub_entry_toggle.expanded {
+  background: image-url("arrow1_s.png") no-repeat;
+}
+
+.avatar {
+  padding-top: 5px;
+}
+
+div.entry_actions {
+
+  a {
+    font-size: 11pt;
+    float: right;
+
+    &.edit {
+      background: image-url("edit.png") no-repeat;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}

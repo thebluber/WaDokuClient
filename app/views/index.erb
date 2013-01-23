@@ -1,9 +1,20 @@
 <div class='row'>
-  <div class='span12'>
+  <div class='span12' id='entries'>
     <% @entries.each do |entry| %>
-      <p>
-        <%= entry["midashigo"] %>
-      </p>
+      <div class='entry'>
+        <h3><%= entry["writing"] %></h3>
+        <p><%= entry["definition"] %></p>
+      </div>
+    <% end %>
+    <% if @more %>
+      <div class='row'>
+        <div class='span12'>
+          <h2>
+            Gibt noch mehr <%= @parsed["total"] %>, <%= @parsed["offset"] %>
+            <a class='next_page' href='<%= @next_page%>' >Weiter</a>
+          </h2>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>
