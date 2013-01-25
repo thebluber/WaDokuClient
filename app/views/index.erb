@@ -1,20 +1,25 @@
-<div class='row'>
-  <div class='span12' id='entries'>
+<div class='page-header'>
+  <h1>Suchergebnisse <small><%= @total %> Treffer </small></h1>
+</div>
+
+<div class='row entries-container' data-page-nr='1' data-query='<%=@query%>' data-offset='<%= @offset %>'>
+  <div class='span12 entries'>
     <% @entries.each do |entry| %>
       <div class='entry'>
-        <h3><%= entry["writing"] %></h3>
-        <p><%= entry["definition"] %></p>
+        <p class='hanging-indent'>
+          <span class='writing'><%= entry["midashigo"] %></span>
+          <%= entry["definition"] %>
+        </p>
       </div>
     <% end %>
+  </div>
+</div>
+<div class='row'>
+  <div class='span10 offset2'>
     <% if @more %>
-      <div class='row'>
-        <div class='span12'>
-          <h2>
-            Gibt noch mehr <%= @parsed["total"] %>, <%= @parsed["offset"] %>
-            <a class='next_page' href='<%= @next_page%>' >Weiter</a>
-          </h2>
-        </div>
-      </div>
+      <h2>
+        <a class='next_page' href='<%= @next_page%>' >Weiter</a>
+      </h2>
     <% end %>
   </div>
 </div>

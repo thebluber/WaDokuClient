@@ -8,12 +8,15 @@ class WadokuSearchClient < Sinatra::Base
       @entries = @parsed["entries"]
       @query = params[:query]
       puts infolog(response, @entries) if ENV["RACK_ENV"] == "development"
+      @offset = @parsed["offset"].to_i
+      @more = @parsed["total"].to_i > ((@offset / 30) + 1) * 30
+      @total = @parsed["total"]
+      @next_page = "/?query=#{@query}&offset=#{@offset + 30}"
     end
 
     @entries ||= []
-    @offset = @parsed["offset"].to_i
-    @more = @parsed["total"].to_i > ((@offset / 30) + 1) * 30
-    @next_page = "/?query=#{@query}&offset=#{@offset + 30}"
+    @offset ||= 0
+    @total ||= 0
     erb :index
   end
 

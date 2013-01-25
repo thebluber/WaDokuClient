@@ -16,44 +16,87 @@ var WaDokuAPI = {
 var add_new_entries = function (results) {
   var i;
   var entry;
-  var header, definition;
+  var content, header;
+  var new_entries_container;
+  var new_entries_div;
+  var page_number_title;
+  var page_number_title_span;
+
   entries = results.entries;
+  new_entries_container = document.createElement('div');
+  new_entries_container.className = 'row entries-container';
+  new_entries_div = document.createElement('div');
+  new_entries_div.className = 'span12 entries';
+  page_number_title = document.createElement('h3');
+  page_number_title_span = document.createElement('span');
+  page_number_title_span.className = 'span12';
+  page_number_title_span.appendChild(page_number_title);
+  new_entries_container.appendChild(page_number_title_span);
+  new_entries_container.appendChild(new_entries_div);
+
   for(i = 0; i < entries.length; i++) {
     // This should probably be done with some kind of templates.
-    console.log(entries[i].writing);
     entry = document.createElement('div');
     entry.className = 'entry';
-    header = document.createElement('h3');
-    header.innerHTML = entries[i].writing;
-    definition = document.createElement('p');
-    definition.innerHTML = entries[i].definition;
-    entry.appendChild(header);
-    entry.appendChild(definition);
-    $("#entries").append(entry);
+    content = document.createElement('p');
+    content.className = 'hanging-indent';
+    header = document.createElement('span');
+    header.className = 'writing';
+    header.innerHTML = entries[i].midashigo;
+    content.appendChild(header);
+    content.innerHTML += entries[i].definition;
+    entry.appendChild(content);
+    new_entries_div.appendChild(entry);
+  }
+  var pageNr = $('.entries-container').last().data('pageNr') + 1;
+  var total = Math.ceil(results.total / 30);
+  page_number_title.innerHTML = "Seite " + pageNr + " von " + total;
+  $(new_entries_container).data('pageNr', pageNr);
+  $(new_entries_container).data('query', results.query);
+  $(new_entries_container).data('offset', results.offset);
+  $('.entries-container').last().after(new_entries_container);
+  balance_columns($(new_entries_container));
+  if(total !== pageNr) {
+    $('.loader').remove();
+  }  else {
+    $('.loader').hide(); // Effectively stops loading. Somewhat hacky.
   }
 };
 
 var register_infinite_scroll = function () {
   var next_page_link = $('a.next_page');
   next_page_link.hide();
+  $(window).scroll(function() {
+    if ($(window).scrollTop() > ($(document).height() - $(window).height()) - 100) {
+      load_next_page();
+    }
+  });
 };
 
 var load_next_page = function () {
-  var next_page_link = $('a.next_page');
-  var url = next_page_link.attr("href");
-  next_page_link.remove();
-  WaDokuAPI.getResults(url, add_new_entries);
+  if($(".loader").size() === 0) {
+    image = $("<img class='loader' src='/ajax-loader.gif' />");
+    last_container = $('.entries-container').last();
+    last_container.after(image);
+    //var next_page_link = $('a.next_page');
+    //var url = next_page_link.attr("href");
+    url = "/?query=" + last_container.data('query') + "&offset=" + (last_container.data('offset') + 30);
+    console.log(url);
+    WaDokuAPI.getResults(url, add_new_entries);
+  }
 };
 
-var balance_columns = function () {
-  var entries = $(".entry");
+var balance_columns = function (entries_container) {
+  var entries = entries_container.find(".entry");
   var entries_left = document.createElement('div');
   var entries_right = document.createElement('div');
+  var entries_div = entries_container.find(".entries");
   entries_left.className = 'span6';
   entries_right.className = 'span6';
-  $("#entries").prepend(entries_right);
-  $("#entries").prepend(entries_left);
-  $("#entries").removeClass("span12");
+
+  entries_div.prepend(entries_right);
+  entries_div.prepend(entries_left);
+  entries_div.removeClass("span12");
 
   var height = function(collection) {
     return _.reduce(collection, function(res, el) {return res + $(el).height();}, 0);
@@ -67,8 +110,6 @@ var balance_columns = function () {
     var switcher = $(entries_left).children().last();
     switcher.remove();
     $(entries_right).prepend(switcher);
-    console.log(height($(entries_left).children()));
-    console.log(height($(entries_right).children()));
   }
 
   // Pad the height of the smaller column
@@ -91,7 +132,7 @@ var balance_columns = function () {
     padding = (hr - hl) / (hlc.length - 1);
   }
   var i;
-  
+
   // Pad them all.
   for(i = 0; i < paddee.length - 1; i++) {
     var padding_bottom = parseInt($(paddee[i]).css('padding-bottom'), 10);
@@ -101,7 +142,7 @@ var balance_columns = function () {
 };
 
 var init = function() {
-  balance_columns();
+  balance_columns($('.entries-container').last());
   register_infinite_scroll();
 };
 

@@ -21,13 +21,15 @@
   </div>
 
   <div class="container">
+    <div class='content'>
 
-    <%= yield %>
+      <%= yield %>
 
-    <footer>
-      <p>Daten: &copy; <%= Time.now.year %> <a href="http://wadoku-ev.de">Wadoku e.V.</a> | Programmierung: &copy; <%= Time.now.year %> <a href="http://rbraun.net">Roger Braun</a></p>
-      <p>Code und Daten dieser Seite stehen unter offenen Lizenzen (CC und GPL). Beides findet sich auf <a href='https://github.com/Wadoku"'>GitHub</a>.</p>
-    </footer>
+      <footer>
+        <p>Daten: &copy; <%= Time.now.year %> <a href="http://wadoku-ev.de">Wadoku e.V.</a> | Programmierung: &copy; <%= Time.now.year %> <a href="http://rbraun.net">Roger Braun</a></p>
+        <p>Code und Daten dieser Seite stehen unter offenen Lizenzen (CC und GPL). Beides findet sich auf <a href='https://github.com/Wadoku"'>GitHub</a>.</p>
+      </footer>
+    </div>
   </div>
 </body>
 </html>
