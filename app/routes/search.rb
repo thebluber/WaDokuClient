@@ -1,5 +1,12 @@
 class WadokuSearchClient < Sinatra::Base
 
+  get "/entries/by-daid/:daid" do 
+    response = RestClient.get settings.api_host + "/api/v1/entry/#{params[:daid]}"
+    @entry = Yajl::Parser.parse(response)
+    @entry_template ||= open(File.join(ROOT_DIR, "public/entry.mustache")).read
+    erb :entry
+  end
+
   get "/" do
 
     if params[:query]

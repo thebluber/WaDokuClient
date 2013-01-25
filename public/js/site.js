@@ -157,8 +157,13 @@ var balance_columns = function (entries_container) {
 
 var register_popups = function() {
   $(".content").on('mouseenter',"a[href^='/entries/by-daid/']", function(ev) {
-    ev.preventDefault();
+    //ev.preventDefault();
     el = $(this);
+    // Load only once.
+    if(el.data('popup-initialized')) {
+      return;
+    }
+    el.data('popup-initialized', true);
     var template = $("#entry-template").html();
     var one_entry = function(content) {
       console.log(content);
@@ -177,9 +182,9 @@ var register_popups = function() {
 };
 
 var init = function() {
-  balance_columns($('.entries-container').last());
   register_infinite_scroll();
   register_popups();
+  balance_columns($('.entries-container').last());
 };
 
 $(init);
