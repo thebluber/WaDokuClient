@@ -10,6 +10,15 @@ var WaDokuAPI = {
       dataType: "jsonp",
       success: callback
     });
+  },
+  getEntry: function(daaid, callback) {
+    url = this.api_host + "/api/v1/entry/" + daaid;
+    console.log(url);
+    $.ajax({
+      url: url,
+      dataType: "jsonp",
+      success: callback
+    });
   }
 };
 
@@ -21,6 +30,15 @@ var add_new_entries = function (results) {
   var new_entries_div;
   var page_number_title;
   var page_number_title_span;
+
+  var pageNr = $('.entries-container').last().data('pageNr') + 1;
+  var total = Math.ceil(results.total / 30);
+
+  // Sanity check
+  if(pageNr > total) {
+    $(".loader").hide();
+    return;
+  }
 
   entries = results.entries;
   new_entries_container = document.createElement('div');
@@ -34,22 +52,18 @@ var add_new_entries = function (results) {
   new_entries_container.appendChild(page_number_title_span);
   new_entries_container.appendChild(new_entries_div);
 
+  var template = $("#entry-template").html();
+
   for(i = 0; i < entries.length; i++) {
+    if(entries[i].caption) {
+      console.log(entries[i].caption);
+      console.log(entries[i].picture);
+    }
+    entries[i].api_host = WaDokuAPI.api_host;
     // This should probably be done with some kind of templates.
-    entry = document.createElement('div');
-    entry.className = 'entry';
-    content = document.createElement('p');
-    content.className = 'hanging-indent';
-    header = document.createElement('span');
-    header.className = 'writing';
-    header.innerHTML = entries[i].midashigo;
-    content.appendChild(header);
-    content.innerHTML += entries[i].definition;
-    entry.appendChild(content);
-    new_entries_div.appendChild(entry);
+    entry = $(Mustache.render(template, entries[i]));
+    entry.appendTo(new_entries_div);
   }
-  var pageNr = $('.entries-container').last().data('pageNr') + 1;
-  var total = Math.ceil(results.total / 30);
   page_number_title.innerHTML = "Seite " + pageNr + " von " + total;
   $(new_entries_container).data('pageNr', pageNr);
   $(new_entries_container).data('query', results.query);
@@ -141,9 +155,31 @@ var balance_columns = function (entries_container) {
   }
 };
 
+var register_popups = function() {
+  $(".content").on('mouseenter',"a[href^='/entries/by-daid/']", function(ev) {
+    ev.preventDefault();
+    el = $(this);
+    var template = $("#entry-template").html();
+    var one_entry = function(content) {
+      console.log(content);
+      el.popover({
+        title: "Eintrag",
+        placement: "bottom",
+        trigger: "hover",
+        html: true,
+        content: Mustache.render(template,content)});
+      el.popover("show");
+    };
+    var daaid = this.href.match(/\d+$/)[0];
+    WaDokuAPI.getEntry(daaid, one_entry);
+  }
+  );
+};
+
 var init = function() {
   balance_columns($('.entries-container').last());
   register_infinite_scroll();
+  register_popups();
 };
 
 $(init);

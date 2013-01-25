@@ -104,6 +104,10 @@ text-indent: -25px;
 padding-left: 25px;
 }
 
+.hanging-indent .popover-inner{
+text-indent: 0;
+}
+
 .entry .writing {
   font-size: 1.5em;
 }
@@ -160,7 +164,7 @@ padding-left: 25px;
   font-weight: bold;
 }
 
-.svg_image .svg a img{
+.svg_image .svg img{
   width: 150px;
   display: block;
   margin-left: auto;

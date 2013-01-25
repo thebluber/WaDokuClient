@@ -1,4 +1,5 @@
 class WadokuSearchClient < Sinatra::Base
+
   get "/" do
 
     if params[:query]
@@ -17,10 +18,16 @@ class WadokuSearchClient < Sinatra::Base
     @entries ||= []
     @offset ||= 0
     @total ||= 0
+    @entry_template ||= open(File.join(ROOT_DIR, "public/entry.mustache")).read
     erb :index
   end
 
   helpers do
+    def render_entry entry
+      @template ||= open(File.join(ROOT_DIR, "public/entry.mustache")).read
+      Mustache.render(@template, entry)
+    end
+
     def infolog response, entries
       puts "Entries: #{entries.count}"
     end
