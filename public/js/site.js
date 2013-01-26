@@ -4,7 +4,6 @@ var WaDokuAPI = {
     query = query.replace("/", "");
     query = query + "&format=html";
     url = this.api_host + "/api/v1/search" + query;
-    console.log(url);
     $.ajax({
       url: url,
       dataType: "jsonp",
@@ -13,7 +12,6 @@ var WaDokuAPI = {
   },
   getEntry: function(daaid, callback) {
     url = this.api_host + "/api/v1/entry/" + daaid;
-    console.log(url);
     $.ajax({
       url: url,
       dataType: "jsonp",
@@ -57,8 +55,6 @@ var add_new_entries = function (results) {
 
   for(i = 0; i < entries.length; i++) {
     if(entries[i].caption) {
-      console.log(entries[i].caption);
-      console.log(entries[i].picture);
     }
     entries[i].api_host = WaDokuAPI.api_host;
     // This should probably be done with some kind of templates.
@@ -99,7 +95,6 @@ var load_next_page = function () {
     //var next_page_link = $('a.next_page');
     //var url = next_page_link.attr("href");
     url = "/?query=" + last_container.data('query') + "&offset=" + (last_container.data('offset') + 30);
-    console.log(url);
     WaDokuAPI.getResults(url, add_new_entries);
   }
 };
@@ -170,7 +165,6 @@ var register_popups = function() {
     el.data('popup-initialized', true);
     var template = $("#entry-template").html();
     var one_entry = function(content) {
-      console.log(content);
       el.popover({
         title: "Eintrag",
         placement: "bottom",
