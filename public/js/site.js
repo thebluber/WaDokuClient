@@ -75,6 +75,7 @@ var add_new_entries = function (results) {
   }  else {
     $('.loader').hide(); // Effectively stops loading. Somewhat hacky.
   }
+  $(window).scroll();
 };
 
 var register_infinite_scroll = function () {
@@ -85,6 +86,7 @@ var register_infinite_scroll = function () {
       load_next_page();
     }
   });
+  $(window).scroll();
 };
 
 var load_next_page = function () {
