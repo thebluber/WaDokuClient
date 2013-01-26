@@ -8,7 +8,6 @@ class WadokuSearchClient < Sinatra::Base
   end
 
   get "/" do
-
     if params[:query]
       params[:format] = "html"
       response = RestClient.get settings.api_host + "/api/v1/search", {params: params}
@@ -20,13 +19,14 @@ class WadokuSearchClient < Sinatra::Base
       @more = @parsed["total"].to_i > ((@offset / 30) + 1) * 30
       @total = @parsed["total"]
       @next_page = "/?query=#{@query}&offset=#{@offset + 30}"
+      @entries ||= []
+      @offset ||= 0
+      @total ||= 0
+      @entry_template ||= open(File.join(ROOT_DIR, "public/entry.mustache")).read
+      erb :index
+    else
+      erb :start
     end
-
-    @entries ||= []
-    @offset ||= 0
-    @total ||= 0
-    @entry_template ||= open(File.join(ROOT_DIR, "public/entry.mustache")).read
-    erb :index
   end
 
   helpers do
