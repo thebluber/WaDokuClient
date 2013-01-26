@@ -82,7 +82,7 @@ var register_infinite_scroll = function () {
   var next_page_link = $('a.next_page');
   next_page_link.hide();
   $(window).scroll(function() {
-    if ($(window).scrollTop() > ($(document).height() - $(window).height()) - 100) {
+    if (($(window).scrollTop() > ($(document).height() - $(window).height()) - 100) || $(window).height() === $(document).height() ) {
       load_next_page();
     }
   });
