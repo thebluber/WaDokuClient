@@ -169,6 +169,7 @@ text-indent: 0;
 }
 
 .svg_image .svg img{
+  margin-top: 10px;
   height: 200px;
   display: block;
   margin-left: auto;
