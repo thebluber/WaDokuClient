@@ -29,3 +29,15 @@ set :deploy_via, :remote_cache
 set :user, "deploy"
 set :use_sudo, false
 set :git_enable_submodules, 1
+
+namespace :deploy do
+  task :start, :roles => :app  do 
+    run "touch #{current_path}/tmp/restart.txt"
+  end
+
+  task :stop do ; end
+
+  task :restart, :roles => :app do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
+end
