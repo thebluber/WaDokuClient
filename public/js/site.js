@@ -1,5 +1,5 @@
 var WaDokuAPI = {
-  api_host: 'http://localhost:10010',
+  api_host: api_host || 'http://localhost:10010',
   getResults: function(query, callback) {
     query = query.replace("/", "");
     query = query + "&format=html";

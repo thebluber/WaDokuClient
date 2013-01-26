@@ -165,7 +165,7 @@ text-indent: 0;
 }
 
 .svg_image .svg img{
-  width: 150px;
+  height: 200px;
   display: block;
   margin-left: auto;
   margin-right: auto;
