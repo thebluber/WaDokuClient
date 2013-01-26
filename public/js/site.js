@@ -37,6 +37,7 @@ var add_new_entries = function (results) {
   // Sanity check
   if(pageNr > total) {
     $(".loader").hide();
+    $('.next-page-div').hide();
     return;
   }
 
@@ -74,18 +75,19 @@ var add_new_entries = function (results) {
     $('.loader').remove();
   }  else {
     $('.loader').hide(); // Effectively stops loading. Somewhat hacky.
+    $('.next-page-div').hide();
   }
   $(window).scroll();
 };
 
 var register_infinite_scroll = function () {
   var next_page_link = $('a.next_page');
-  next_page_link.hide();
   $(window).scroll(function() {
     if (($(window).scrollTop() > ($(document).height() - $(window).height()) - 100) || $(window).height() === $(document).height() ) {
       load_next_page();
     }
   });
+  $('.next_page').on('click', function(el){el.preventDefault(); load_next_page();});
   $(window).scroll();
 };
 

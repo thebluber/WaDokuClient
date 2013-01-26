@@ -5,6 +5,10 @@
   padding-top: 10px;
 }
 
+.next-page-div {
+  padding-top: 20px;
+  }
+
 body {
   /* from http://subtlepatterns.com */
   background-image: url("/handmadepaper.png");
