@@ -1,13 +1,16 @@
 .loader {
-
   display:block;
   margin:0px auto;
   padding-top: 10px;
 }
 
+.popover {
+  width: 400px;
+}
+
 .next-page-div {
   padding-top: 20px;
-  }
+}
 
 body {
   /* from http://subtlepatterns.com */
