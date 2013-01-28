@@ -33,7 +33,7 @@ var add_new_entries = function (results) {
   var total = Math.ceil(results.total / 30);
 
   // Sanity check
-  if(pageNr > total) {
+  if(pageNr > total || total === 0) {
     $(".loader").hide();
     $('.next-page-div').hide();
     return;
@@ -54,8 +54,6 @@ var add_new_entries = function (results) {
   var template = $("#entry-template").html();
 
   for(i = 0; i < entries.length; i++) {
-    if(entries[i].caption) {
-    }
     entries[i].api_host = WaDokuAPI.api_host;
     // This should probably be done with some kind of templates.
     entry = $(Mustache.render(template, entries[i]));
