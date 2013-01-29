@@ -177,9 +177,29 @@ var register_popups = function() {
   );
 };
 
+var register_audio = function() {
+
+  soundManager.setup({
+    url: '/swf/' // TODO make this dynamic.
+  });
+
+  $('.content').on('click', 'a.pronunciation_audio', function(ev) {
+    ev.preventDefault();
+    el = $(this);
+    audio = soundManager.createSound({
+      id: "pronunciation",
+      url: el.attr('href')
+    });
+    audio.play();
+  });
+
+
+};
+
 var init = function() {
   register_infinite_scroll();
   register_popups();
+  register_audio();
   balance_columns($('.entries-container').last());
 };
 

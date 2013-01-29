@@ -179,14 +179,13 @@ text-indent: 0;
   margin-right: auto;
 }
 
-.pron_audio {
-  background-image: image-url("loudspeaker.png");
+a.pronunciation_audio {
+  background-image: url("/loudspeaker.png");
   background-repeat: no-repeat;
-  vertical-align: super;
-}
-
-.pron_audio a {
-  margin-left: 15px;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  text-indent: -99999px;
 }
 
 .famn {
@@ -235,3 +234,4 @@ div.entry_actions {
     }
   }
 }
+
