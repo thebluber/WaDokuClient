@@ -15,6 +15,7 @@
 body {
   /* from http://subtlepatterns.com */
   background-image: url("/handmadepaper.png");
+  padding-top: 40px;
 }
 
 html {
