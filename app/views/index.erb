@@ -6,7 +6,7 @@
   <div class='span12 entries'>
     <% @entries.each do |entry| %>
       <% entry["api_host"] = settings.api_host %>
-      <%= render_entry entry %>
+      <%= mustache :entry, entry %>
     <% end %>
   </div>
 </div>

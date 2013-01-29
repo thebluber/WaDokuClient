@@ -3,7 +3,7 @@ class WadokuSearchClient < Sinatra::Base
   get "/entries/by-daid/:daid" do 
     response = RestClient.get settings.api_host + "/api/v1/entry/#{params[:daid]}"
     @entry = Yajl::Parser.parse(response)
-    @entry_template ||= open(File.join(ROOT_DIR, "public/entry.mustache")).read
+    @entry_template = mustache_template :entry
     erb :entry
   end
 
@@ -22,7 +22,7 @@ class WadokuSearchClient < Sinatra::Base
       @entries ||= []
       @offset ||= 0
       @total ||= 0
-      @entry_template ||= open(File.join(ROOT_DIR, "public/entry.mustache")).read
+      @entry_template = mustache_template :entry
       erb :index
     else
       erb :start
@@ -30,9 +30,15 @@ class WadokuSearchClient < Sinatra::Base
   end
 
   helpers do
-    def render_entry entry
-      @template ||= open(File.join(ROOT_DIR, "public/entry.mustache")).read
-      Mustache.render(@template, entry)
+
+    def mustache_template name
+      @@templates ||= {}
+      @@templates[name] = File.read(File.join(ROOT_DIR, "app", "views", "#{name}.mustache")) unless @@templates[name]
+      @@templates[name]
+    end
+
+    def mustache name, obj
+      Mustache.render(mustache_template(name), obj)
     end
 
     def infolog response, entries
