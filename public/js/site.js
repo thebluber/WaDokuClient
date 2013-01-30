@@ -196,10 +196,22 @@ var register_audio = function() {
 
 };
 
+var register_search_counter = function () {
+  $("#search-top").on("keyup", function() {
+    el = $(this);
+    $.getJSON(WaDokuAPI.api_host + '/api/v1/picky?callback=?', {query: el.val()}, function(data) {
+      console.log(data);
+      var count = data.total;
+      $(".picky-counter").text(count);
+    });
+  });
+};
+
 var init = function() {
   register_infinite_scroll();
   register_popups();
   register_audio();
+  register_search_counter();
   balance_columns($('.entries-container').last());
 };
 

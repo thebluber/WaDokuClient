@@ -4,6 +4,11 @@
   padding-top: 10px;
 }
 
+.picky-counter {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
 .popover {
   width: 400px;
 }
