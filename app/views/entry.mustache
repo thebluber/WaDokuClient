@@ -1,21 +1,28 @@
 <div class='entry'>
-  <p class='hanging-indent'>
-    <span class='writing'>
-      <ruby><rb>{{midashigo}}</rb><rp> (</rp><rt>{{furigana}}</rt><rp> )</rp></ruby>
-    </span>
-    {{#audio}}
-      <a class='pronunciation_audio' href='{{api_host}}{{audio}}'>Aussprache</a>
-    {{/audio}}
-    {{{definition}}}
-  </p>
-  {{#caption}}
-    <span class='svg_image'>
-      <span class='image_caption'>
-        {{caption}}
+  {{^error}}
+    <p class='hanging-indent'>
+      <span class='writing'>
+        <ruby><rb>{{midashigo}}</rb><rp> (</rp><rt>{{furigana}}</rt><rp> )</rp></ruby>
       </span>
-      <span class='svg'>
-        <img src='{{api_host}}{{picture}}' type='image/svg+xml' alt='{{caption}}' />
+      {{#audio}}
+        <a class='pronunciation_audio' href='{{api_host}}{{audio}}'>Aussprache</a>
+      {{/audio}}
+      {{{definition}}}
+    </p>
+    {{#caption}}
+      <span class='svg_image'>
+        <span class='image_caption'>
+          {{caption}}
+        </span>
+        <span class='svg'>
+          <img src='{{api_host}}{{picture}}' type='image/svg+xml' alt='{{caption}}' />
+        </span>
       </span>
-    </span>
-  {{/caption}}
+    {{/caption}}
+  {{/error}}
+  {{#error}}
+    <b>Fehler beim Laden</b>
+    <p>{{error}}</p>
+  {{/error}}
+
 </div>
