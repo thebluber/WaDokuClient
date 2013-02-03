@@ -1,7 +1,7 @@
 class WadokuSearchClient < Sinatra::Base
 
   get "/entries/by-daid/:daid" do 
-    response = RestClient.get settings.api_host + "/api/v1/entry/#{params[:daid]}"
+    response = RestClient.get settings.api_host + "/api/v1/entry/#{params[:daid]}?full_subentries=true"
     @entry = Yajl::Parser.parse(response)
     @entry_template = mustache_template :entry
     erb :entry
@@ -10,9 +10,11 @@ class WadokuSearchClient < Sinatra::Base
   get "/" do
     if params[:query]
       params[:format] = "html"
+      params[:full_subentries] = 'true'
       response = RestClient.get settings.api_host + "/api/v1/search", {params: params}
       @parsed = Yajl::Parser.parse(response)
       @entries = @parsed["entries"]
+      @entries = @entries.each_with_index.map {|e, i| e["odd"] = "odd" if i % 2 == 1 ; e}
       @query = params[:query]
       puts infolog(response, @entries) if ENV["RACK_ENV"] == "development"
       @offset = @parsed["offset"].to_i

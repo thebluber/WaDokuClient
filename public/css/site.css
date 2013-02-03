@@ -136,31 +136,17 @@ text-indent: 0;
   padding-bottom: 3px;
 }
 
-.entry:nth-child(even) {
+.entry.odd {
   background: #EBEEF5;
 }
 
-.entry.main_entry {
-  background: #F8C3CD;
-}
-
-.sub_entries {
-  margin-top: 10px;
-  margin-left: 20px;
-
-  border-style: dashed;
-  border-width: 1px;
-
-  display: none;
-
-  .entry.even {
-    background: #F2EBF5;
-  }
-
-  .entry.odd {
-    background: #F5F2EB;
-  }
-}
+.entries .span6:nth-child(even) {
+   border-left: 1px solid gray;
+   padding-left:20px;
+   -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+ }
 
 .prior_1, .prior_2, .prior_3, .prior_4, .jlpt1, .jlpt2, .jlpt3, .jlpt4, .genki_k9 {
   display:none;

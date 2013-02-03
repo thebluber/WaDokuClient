@@ -2,7 +2,7 @@ var WaDokuAPI = {
   api_host: api_host || 'http://localhost:10010',
   getResults: function(query, callback) {
     query = query.replace("/", "");
-    query = query + "&format=html";
+    query = query + "&format=html&full_subentries=true"; // TODO: Full subentries should not be hardcoded
     url = this.api_host + "/api/v1/search" + query;
     $.ajax({
       url: url,
@@ -13,7 +13,7 @@ var WaDokuAPI = {
   getEntry: function(daaid, callback) {
     url = this.api_host + "/api/v1/entry/" + daaid;
     $.ajax({
-      url: url,
+      url: url + "?full_subentries=true",
       dataType: "jsonp",
       success: callback
     });
@@ -55,7 +55,11 @@ var add_new_entries = function (results) {
 
   for(i = 0; i < entries.length; i++) {
     entries[i].api_host = WaDokuAPI.api_host;
+    if(i % 2 === 1) {
+      entries[i].odd = "odd";
+    }
     entry = $(Mustache.render(template, entries[i]));
+    console.log(entries[i]);
     entry.appendTo(new_entries_div);
   }
   page_number_title.innerHTML = "Seite " + pageNr + " von " + total;
@@ -214,4 +218,4 @@ var init = function() {
   balance_columns($('.entries-container').last());
 };
 
-$(init);
+$(window).load(init);

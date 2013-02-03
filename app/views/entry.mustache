@@ -1,4 +1,4 @@
-<div class='entry'>
+<div class='entry {{odd}}'>
   {{^error}}
     <p class='hanging-indent'>
       <span class='writing'>
@@ -24,5 +24,24 @@
     <b>Fehler beim Laden</b>
     <p>{{error}}</p>
   {{/error}}
-
 </div>
+{{#sub_entries}}
+<div class='entry {{odd}}'>
+  <p class='hanging-indent'>
+    <b>{{relation}}</b>
+  </p>
+</div>
+  {{#entries}}
+  <div class='entry {{odd}}'>
+    <p class='hanging-indent'>
+    <span class='writing'>
+      <ruby><rb>{{midashigo}}</rb><rp> (</rp><rt>{{furigana}}</rt><rp> )</rp></ruby>
+    </span>
+    {{#audio}}
+      <a class='pronunciation_audio' href='{{api_host}}{{audio}}'>Aussprache</a>
+    {{/audio}}
+    {{{definition}}}
+    </p>
+  </div>
+  {{/entries}}
+{{/sub_entries}}
