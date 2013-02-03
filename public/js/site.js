@@ -55,7 +55,6 @@ var add_new_entries = function (results) {
 
   for(i = 0; i < entries.length; i++) {
     entries[i].api_host = WaDokuAPI.api_host;
-    // This should probably be done with some kind of templates.
     entry = $(Mustache.render(template, entries[i]));
     entry.appendTo(new_entries_div);
   }
