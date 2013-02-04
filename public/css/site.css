@@ -9,6 +9,10 @@
   font-size: 20px;
 }
 
+rt {
+  text-align: left;
+}
+
 .popover {
   width: 400px;
 }
