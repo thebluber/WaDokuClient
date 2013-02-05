@@ -101,7 +101,7 @@ span.dom:after {
   content: ")";
 }
 
-span.usage, span.title, span.transcr, span.etym, span.scientif {
+span.usage, span.title, span.transcr, span.fore, span.scientif {
   font-style: italic;
 }
 
