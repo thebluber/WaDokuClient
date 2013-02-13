@@ -2,7 +2,7 @@ var WaDokuAPI = {
   api_host: api_host || 'http://localhost:10010',
   getResults: function(query, callback) {
     query = query.replace("/", "");
-    query = query + "&format=html&full_subentries=true"; // TODO: Full subentries should not be hardcoded
+    query = query + "&format=html&full_subentries=true&limit=15"; // TODO: Full subentries should not be hardcoded
     url = this.api_host + "/api/v1/search" + query;
     $.ajax({
       url: url,
@@ -30,7 +30,7 @@ var add_new_entries = function (results) {
   var page_number_title_span;
 
   var pageNr = $('.entries-container').last().data('pageNr') + 1;
-  var total = Math.ceil(results.total / 30);
+  var total = Math.ceil(results.total / 15);
 
   // Sanity check
   if(pageNr > total || total === 0) {
@@ -95,7 +95,7 @@ var load_next_page = function () {
     last_container.after(image);
     //var next_page_link = $('a.next_page');
     //var url = next_page_link.attr("href");
-    url = "/?query=" + last_container.data('query') + "&offset=" + (last_container.data('offset') + 30);
+    url = "/?query=" + last_container.data('query') + "&offset=" + (last_container.data('offset') + 15);
     WaDokuAPI.getResults(url, add_new_entries);
   }
 };
