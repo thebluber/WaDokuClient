@@ -79,13 +79,16 @@ var add_new_entries = function (results) {
 
 var register_infinite_scroll = function () {
   var next_page_link = $('a.next_page');
-  $(window).scroll(function() {
-    if (($(window).scrollTop() > ($(document).height() - $(window).height()) - 100) || $(window).height() === $(document).height() ) {
-      load_next_page();
-    }
-  });
-  $('.next_page').on('click', function(el){el.preventDefault(); load_next_page();});
-  $(window).scroll();
+  // Do nothing if there is no next page
+  if(next_page_link.length !== 0) {
+    $(window).scroll(function() {
+      if (($(window).scrollTop() > ($(document).height() - $(window).height()) - 100) || $(window).height() === $(document).height() ) {
+        load_next_page();
+      }
+    });
+    $('.next_page').on('click', function(el){el.preventDefault(); load_next_page();});
+    $(window).scroll();
+  }
 };
 
 var load_next_page = function () {
