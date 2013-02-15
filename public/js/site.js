@@ -32,6 +32,9 @@ var add_new_entries = function (results) {
   var pageNr = $('.entries-container').last().data('pageNr') + 1;
   var total = Math.ceil(results.total / 15);
 
+  // Show "next page" link again
+  $('a.next_page').show();
+
   // Sanity check
   if(pageNr > total || total === 0) {
     $(".loader").hide();
@@ -92,7 +95,9 @@ var register_infinite_scroll = function () {
 };
 
 var load_next_page = function () {
+
   if($(".loader").size() === 0) {
+    $('a.next_page').hide();
     image = $("<img class='loader' src='/ajax-loader.gif' />");
     last_container = $('.entries-container').last();
     last_container.after(image);
