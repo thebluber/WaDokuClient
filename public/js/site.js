@@ -17,6 +17,15 @@ var WaDokuAPI = {
       dataType: "jsonp",
       success: callback
     });
+  },
+  getSuggestions: function(query, callback) {
+    url = this.api_host + "/api/v1/suggestions";
+    $.ajax({
+      url: url,
+      data: {query: query},
+      dataType: 'jsonp',
+      success: callback
+    });
   }
 };
 
@@ -62,7 +71,6 @@ var add_new_entries = function (results) {
       entries[i].odd = "odd";
     }
     entry = $(Mustache.render(template, entries[i]));
-    console.log(entries[i]);
     entry.appendTo(new_entries_div);
   }
   page_number_title.innerHTML = "Seite " + pageNr + " von " + total;
@@ -204,17 +212,27 @@ var register_audio = function() {
     audio.play();
   });
 
-
 };
 
 var register_search_counter = function () {
   $("#search-top").on("keyup", function() {
     el = $(this);
     $.getJSON(WaDokuAPI.api_host + '/api/v1/picky?callback=?', {query: el.val()}, function(data) {
-      console.log(data);
       var count = data.total;
       $(".picky-counter").text(count);
     });
+  });
+};
+
+var suggestions = function(query, process) {
+  WaDokuAPI.getSuggestions(query, function(data) {
+    process(data.suggestions);
+  });
+};
+
+var register_suggestions = function() {
+  $('.search-query').typeahead({
+    source: suggestions
   });
 };
 
@@ -223,6 +241,7 @@ var init = function() {
   register_popups();
   register_audio();
   register_search_counter();
+  register_suggestions();
   balance_columns($('.entries-container').last());
 };
 
