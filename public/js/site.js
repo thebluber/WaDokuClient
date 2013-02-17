@@ -111,7 +111,7 @@ var load_next_page = function () {
     last_container.after(image);
     //var next_page_link = $('a.next_page');
     //var url = next_page_link.attr("href");
-    url = "/?query=" + last_container.data('query') + "&offset=" + (last_container.data('offset') + 15);
+    url = "/?query=" + last_container.data('query') + "&offset=" + (parseInt(last_container.data('offset'), 10) + 15);
     WaDokuAPI.getResults(url, add_new_entries);
   }
 };
