@@ -10,9 +10,9 @@ set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 set :application, "WaDokuClient"
-set :repository,  "git://github.com/Wadoku/WaDokuClient.git"
+set :repository,  "git://rokuhara.japanologie.kultur.uni-tuebingen.de/WaDokuClient.git"
 
-server_ip = "wadoku.eu"
+server_ip = "rokuhara.japanologie.kultur.uni-tuebingen.de"
 
 role :web, server_ip                          # Your HTTP server, Apache/etc
 role :app, server_ip                          # This may be the same as your `Web` server
