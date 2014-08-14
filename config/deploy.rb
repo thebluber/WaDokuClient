@@ -40,4 +40,8 @@ namespace :deploy do
   task :restart, :roles => :app do
     run "touch #{current_path}/tmp/restart.txt"
   end
+
+  task :fix_ownership, :roles => :app do
+    sudo "chown -R deploy:www-data #{deploy_to}"
+  end
 end
