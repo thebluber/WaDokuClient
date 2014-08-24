@@ -30,6 +30,7 @@ set :deploy_via, :remote_cache
 set :user, "deploy"
 set :use_sudo, false
 set :git_enable_submodules, 1
+set :keep_releases, 2
 
 namespace :deploy do
   task :start, :roles => :app  do 
@@ -48,3 +49,4 @@ namespace :deploy do
 end
 
 after "deploy:update_code", "deploy:fix_ownership"
+after "deploy:restart", "deploy:cleanup"
