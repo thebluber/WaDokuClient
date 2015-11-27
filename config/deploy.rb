@@ -3,6 +3,7 @@ require "bundler/capistrano"
 require "capistrano/ext/multistage"
 require "rvm/capistrano"                  # Load RVM's capistrano plugin.
 set :rvm_type, :system  # Copy the exact line. I really mean :system here
+set :normalize_asset_timestamps, false
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
@@ -10,9 +11,9 @@ set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 set :application, "WaDokuClient"
-set :repository,  "git://github.com/Wadoku/WaDokuClient.git"
+set :repository,  "git://rokuhara.japanologie.kultur.uni-tuebingen.de/WaDokuClient.git"
 
-server_ip = "wadoku.eu"
+server_ip = "rokuhara.japanologie.kultur.uni-tuebingen.de"
 
 role :web, server_ip                          # Your HTTP server, Apache/etc
 role :app, server_ip                          # This may be the same as your `Web` server
@@ -29,6 +30,7 @@ set :deploy_via, :remote_cache
 set :user, "deploy"
 set :use_sudo, false
 set :git_enable_submodules, 1
+set :keep_releases, 2
 
 namespace :deploy do
   task :start, :roles => :app  do 
@@ -40,4 +42,11 @@ namespace :deploy do
   task :restart, :roles => :app do
     run "touch #{current_path}/tmp/restart.txt"
   end
+
+  task :fix_ownership, :roles => :app do
+    run "chown -R deploy:www-data #{deploy_to}"
+  end
 end
+
+after "deploy:update_code", "deploy:fix_ownership"
+after "deploy:restart", "deploy:cleanup"
