@@ -26,7 +26,7 @@ document.addEventListener( "DOMContentLoaded", function(){
   $('#ime-toggle').click(function(){
     $('#ime').toggle(function() {
       $('#results').html('');
-      $('body').scrollTop(0);
+      window.scrollTo(0,0);
       init();
     });
     $('.buttons').toggle();
