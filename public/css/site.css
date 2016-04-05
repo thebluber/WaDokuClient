@@ -247,7 +247,7 @@ div.entry_actions {
     left: 0;
     right: 0;
     position: fixed;
-    margin-top: 140px;
+    margin-top: 150px;
   }
 
   #results-phone {
@@ -257,6 +257,7 @@ div.entry_actions {
     right: 0px;
     position: fixed;
     background-color: rgba(255, 255, 255, 0.84);
+    margin-top: 10px;
   }
   .result {
     font-size: 40px;
@@ -268,7 +269,7 @@ div.entry_actions {
     right: 0px;
     overflow:hidden;
     position: fixed;
-    margin-top: 100px;
+    margin-top: 110px;
     margin-right: 45px;
   }
   .search-query {
