@@ -25,6 +25,7 @@ document.addEventListener( "DOMContentLoaded", function(){
 
   $('#ime-toggle').click(function(){
     $('#ime').toggle(function() {
+      $('#results').html('');
       init();
     });
     $('.buttons').toggle();

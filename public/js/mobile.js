@@ -52,6 +52,7 @@ var mobile = function(canvas, buttons) {
 
   //event handlers
   function startRecording(event) {
+    event.preventDefault();
     if(!drawing){
       var x = event.pageX;
       var y = event.pageY;

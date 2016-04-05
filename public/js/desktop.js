@@ -26,7 +26,7 @@ var desktop = function(canvas, buttons) {
 
   //api callbacks
   function errorCallback(msg) {
-    alert(msg);
+    console.log(msg);
   }
 
   function successCallback(results) {
@@ -36,7 +36,7 @@ var desktop = function(canvas, buttons) {
 
   //debounce sending strokes
   function sendStrokes() {
-    var n = Math.floor((window.innerWidth / 1.5) / 50);
+    var n = Math.floor((window.innerWidth / 1.5) / 55);
     api.getScores(strokes, n, successCallback, errorCallback);
   }
   var debounced = _.debounce(sendStrokes, 500, { 'leading': true, 'trailing': false });
