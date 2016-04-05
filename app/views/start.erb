@@ -1,11 +1,14 @@
 <div class='hero-unit'>
-  <h1>WaDokuJT <small>和独辞典</small></h1>
+  <h1>WaDokuJT <small class="hidden-phone">和独辞典</small></h1>
+  <h1><small class="visible-phone">和独辞典</small></h1>
 </div>
 <div class='row'>
-  <div class='span6 offset3'>
+  <div class='span6 offset3 visible-desktop visible-tablet'>
     <form class='form-search' action='<%= to '/' %>'>
-      <input name='query' type='text' autocomplete='off' autofocus class='input-xlarge search-query'>
-      <button type='submit' class='btn'>Suchen!</button>
+      <div class="input-append">
+        <input name='query' type='text' autocomplete='off' autofocus class='input-xlarge search-query'>
+        <button type='submit' class='btn'>Suchen!</button>
+      </div>
     </form>
   </div>
 </div>

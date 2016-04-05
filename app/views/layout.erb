@@ -29,6 +29,7 @@
     <div class='navbar-inner'>
       <div class='container'>
         <a href='<%= to '/' %>' class='brand hidden-phone'>WaDokuJT</a>
+        <a href='<%= to '/' %>' class='brand visible-phone'><i class="fa fa-home"></i></a>
         <div id="results" class="nav pull-left hidden-phone"></div>
 
         <ul class='nav pull-right'>
@@ -68,7 +69,7 @@
       <%= yield %>
 
       <footer>
-        <p>Daten: &copy; <%= Time.now.year %> <a href="http://wadoku-ev.de">Wadoku e.V.</a> | Programmierung: &copy; <%= Time.now.year %> <a href="http://rbraun.net">Roger Braun</a></p>
+        <p>Daten: &copy; <%= Time.now.year %> <a href="http://wadoku-ev.de">Wadoku e.V.</a> | Programmierung: &copy; <%= Time.now.year %> <a href="http://rbraun.net">Roger Braun</a>, <a href="https://github.com/thebluber">Jiayi Zheng</a></p>
         <p>Code und Daten dieser Seite stehen unter offenen Lizenzen (CC und GPL). Beides findet sich auf <a href='https://github.com/Wadoku'>GitHub</a>.</p>
       </footer>
     </div>

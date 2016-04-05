@@ -230,6 +230,13 @@ div.entry_actions {
     }
   }
 }
+
+@media (max-width: 340px){
+  .navbar .brand {
+    display:none !important;
+  }
+}
+
 @media (max-width: 799px){
   .navbar-fixed-top {
     position: fixed;
@@ -239,6 +246,7 @@ div.entry_actions {
   }
   #ime {
     display: none;
+    position: fixed;
   }
   canvas {
     cursor:crosshair ;
@@ -246,7 +254,7 @@ div.entry_actions {
     background-color: rgba(0, 0, 0, 0.15);
     left: 0;
     right: 0;
-    position: fixed;
+    position: inherit;
     margin-top: 150px;
   }
 
@@ -274,6 +282,17 @@ div.entry_actions {
   }
   .search-query {
     border-radius: 0px !important;
+  }
+  .hero-unit {
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .hero-unit h1 {
+    font-size: 250%;
+  }
+  .navbar .brand {
+    margin-left: 15px;
   }
 }
 
