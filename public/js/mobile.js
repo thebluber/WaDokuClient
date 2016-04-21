@@ -54,11 +54,11 @@ var mobile = function(canvas, buttons) {
   function startRecording(event) {
     event.preventDefault();
     if(!drawing){
-      var x = event.pageX;
-      var y = event.pageY;
+      var x = event.clientX;
+      var y = event.clientY;
       if(event.changedTouches){
-        x = event.changedTouches[0].pageX;
-        y = event.changedTouches[0].pageY;
+        x = event.changedTouches[0].clientX;
+        y = event.changedTouches[0].clientY;
       }
       x -= canvas.offsetLeft;
       y -= canvas.offsetTop;
@@ -77,8 +77,8 @@ var mobile = function(canvas, buttons) {
   function recording(event){
     event.preventDefault();
     if(drawing){
-      var x = event.changedTouches[0].pageX;
-      var y = event.changedTouches[0].pageY;
+      var x = event.changedTouches[0].clientX;
+      var y = event.changedTouches[0].clientY;
       x -= canvas.offsetLeft;
       y -= canvas.offsetTop;
 

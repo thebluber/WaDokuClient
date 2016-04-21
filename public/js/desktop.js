@@ -45,8 +45,8 @@ var desktop = function(canvas, buttons) {
   //event handlers
   function startRecording(event) {
     if(!drawing){
-      var x = event.pageX;
-      var y = event.pageY;
+      var x = event.clientX;
+      var y = event.clientY;
       x -= canvas.offsetLeft;
       y -= canvas.offsetTop;
 
@@ -61,8 +61,8 @@ var desktop = function(canvas, buttons) {
 
   function recording(event){
     if(drawing){
-      var x = event.pageX;
-      var y = event.pageY;
+      var x = event.clientX;
+      var y = event.clientY;
       x -= canvas.offsetLeft;
       y -= canvas.offsetTop;
 
