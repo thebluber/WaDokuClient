@@ -11,6 +11,12 @@ function init() {
   };
   if(canvas.getContext){
     if(screen.width <= 800){
+      //this is necessary for preventing auto-hiding and auto-displaying of address bar on mobile devices causing the canvas to jiggle
+      if ($('body').css('position') === 'fixed'){
+        $('body').css({'position': 'relative'});
+      } else {
+        $('body').css({'position': 'fixed'});
+      }
       mobile(canvas, buttons);
     } else {
       desktop(canvas, buttons);
@@ -26,7 +32,6 @@ document.addEventListener( "DOMContentLoaded", function(){
   $('#ime-toggle').click(function(){
     $('#ime').toggle(function() {
       $('#results').html('');
-      window.scrollTo(0,0);
       init();
     });
     $('.buttons').toggle();
