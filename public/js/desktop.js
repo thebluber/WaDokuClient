@@ -37,7 +37,8 @@ var desktop = function(canvas, buttons) {
   //debounce sending strokes
   function sendStrokes() {
     var n = Math.floor((window.innerWidth / 1.5) / 55);
-    api.getScores(strokes, n, successCallback, errorCallback);
+    var ignoreOrder = $('#ignoreOrder')[0].checked;
+    api.getScores(strokes, n, successCallback, errorCallback, ignoreOrder);
   }
   var debounced = _.debounce(sendStrokes, 500, { 'leading': true, 'trailing': false });
   window.addEventListener("send", debounced, false);
@@ -106,5 +107,4 @@ var desktop = function(canvas, buttons) {
 
   buttons.cleanAll.addEventListener("click", cleanAll, false);
   buttons.cleanLast.addEventListener("click", cleanLast, false);
-  //buttons.save.addEventListener("click", save, false);
 };

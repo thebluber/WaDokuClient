@@ -45,7 +45,8 @@ var mobile = function(canvas, buttons) {
   //debounce sending strokes
   function sendStrokes() {
     var n = (window.innerWidth / 50) * 2 - 1;
-    api.getScores(strokes, n, successCallback, errorCallback);
+    var ignoreOrder = $('#ignoreOrder')[0].checked;
+    api.getScores(strokes, n, successCallback, errorCallback, ignoreOrder);
   }
   var debounced = _.debounce(sendStrokes, 500);
   window.addEventListener("send", debounced, false);

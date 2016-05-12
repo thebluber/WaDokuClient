@@ -255,7 +255,7 @@ div.entry_actions {
     left: 0;
     right: 0;
     position: inherit;
-    margin-top: 150px;
+    margin-top: 165px;
   }
 
   #results-phone {
@@ -298,4 +298,8 @@ div.entry_actions {
 
 .navbar-fixed-top {
   position: fixed !important;
+}
+#ignoreOrder {
+  margin-top: 0px;
+  margin-left: 5px;
 }
